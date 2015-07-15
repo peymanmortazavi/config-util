@@ -80,44 +80,46 @@ function stringContains(string, value) {
   return string.indexOf(value) != -1;
 }
 
-Object.defineProperty(Object.prototype, "setValueForKey", {
-  value: function(key, value) {
-    this[key] = value;
-  }
-});
-
-Object.defineProperty(Object.prototype, "setValueForKeyPath", {
-  value: function(keyPath, value) {
-    if (keyPath == null) return;
-    if (stringContains(keyPath, '.') == false) {
-      this.setValueForKey(keyPath, value); return;
+if(!Object.setValueForKey){
+  Object.defineProperty(Object.prototype, "setValueForKey", {
+    value: function(key, value) {
+      this[key] = value;
     }
+  });
 
-    var chain = keyPath.split('.');
-    var firstKey = chain.shift();
-    var shiftedKeyPath = chain.join('.');
+  Object.defineProperty(Object.prototype, "setValueForKeyPath", {
+    value: function(keyPath, value) {
+      if (keyPath == null) return;
+      if (stringContains(keyPath, '.') == false) {
+        this.setValueForKey(keyPath, value); return;
+      }
 
-    if(!this.hasOwnProperty(firstKey)) this[firstKey] = {};
-    this[firstKey].setValueForKeyPath(shiftedKeyPath, value);
-  }
-});
+      var chain = keyPath.split('.');
+      var firstKey = chain.shift();
+      var shiftedKeyPath = chain.join('.');
 
-Object.defineProperty(Object.prototype, "getValueForKey", {
-  value: function(key) { return this[key]; }
-});
+      if(!this.hasOwnProperty(firstKey)) this[firstKey] = {};
+      this[firstKey].setValueForKeyPath(shiftedKeyPath, value);
+    }
+  });
 
-Object.defineProperty(Object.prototype, "getValueForKeyPath", {
-  value: function(keyPath) {
-    if (keyPath == null) return;
-    if (stringContains(keyPath, '.') == false) { return this.getValueForKey(keyPath); }
+  Object.defineProperty(Object.prototype, "getValueForKey", {
+    value: function(key) { return this[key]; }
+  });
 
-    var chain = keyPath.split('.');
-    var firstKey = chain.shift();
-    var shiftedKeyPath = chain.join('.');
+  Object.defineProperty(Object.prototype, "getValueForKeyPath", {
+    value: function(keyPath) {
+      if (keyPath == null) return;
+      if (stringContains(keyPath, '.') == false) { return this.getValueForKey(keyPath); }
 
-    if(!this.hasOwnProperty(firstKey)) return undefined;
-    return this[firstKey].getValueForKeyPath(shiftedKeyPath);
-}});
+      var chain = keyPath.split('.');
+      var firstKey = chain.shift();
+      var shiftedKeyPath = chain.join('.');
+
+      if(!this.hasOwnProperty(firstKey)) return undefined;
+      return this[firstKey].getValueForKeyPath(shiftedKeyPath);
+  }});
+}
 
 var getPropertyValidationResult = function(propertyExpression, value) {
   var type = propertyExpression.split(".")[0];

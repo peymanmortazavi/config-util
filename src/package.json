@@ -1,6 +1,6 @@
 {
   "name": "config-util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small, lightweight and extensible Node.js library to validate/evaluate files (focused on use for config objects).",
   "main": "config-util.js",
   "scripts": {

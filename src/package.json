@@ -1,0 +1,24 @@
+{
+  "name": "config-util",
+  "version": "1.0.0",
+  "description": "Small, lightweight and extensible Node.js library to validate/evaluate files (focused on use for config objects).",
+  "main": "config-util.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peymanmortazavi/config-util.git"
+  },
+  "keywords": [
+    "config",
+    "validation",
+    "utility"
+  ],
+  "author": "Peyman Mortazavi <pey.mortazavi@gmail.com> (https://www.linkedin.com/pub/peyman-mortazavi/50/b51/73b)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peymanmortazavi/config-util/issues"
+  },
+  "homepage": "https://github.com/peymanmortazavi/config-util#readme"
+}

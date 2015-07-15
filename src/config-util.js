@@ -43,6 +43,25 @@ var EvaluationResult = function (isValid, errors, config) {
   this.errors = errors;
   this.config = config;
   this.compile = function () { return compileRecursive(this.config) };
+  this.flatten = function (property1, property2) {
+    return flattenRecursive(this.config, null, null, property1, property2)
+  };
+}
+
+function flattenRecursive(object, keyValuePair, prefix, property1, property2) {
+  keyValuePair = keyValuePair || {};
+  for (var key in object) {
+    if (object.hasOwnProperty(key)) {
+      var currentValue = object[key];
+      if(typeof(currentValue) == 'object' && !currentValue['$leaf']) {
+        flattenRecursive(currentValue, keyValuePair, prefix?prefix+'.'+key:key, property1, property2);
+      } else {
+        if(currentValue[property1])
+          keyValuePair[object[key][property1]] = object[key][property2];
+      }
+    }
+  }
+  return keyValuePair;
 }
 
 function compileRecursive (object) {

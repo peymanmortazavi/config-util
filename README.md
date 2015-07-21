@@ -1,3 +1,7 @@
+[npm-url]: https://npmjs.com/package/config-util
+[downloads-image]: http://img.shields.io/npm/dm/monkey-maker.svg
+[npm-image]: http://img.shields.io/npm/v/monkey-maker.svg
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
 # config-util
 Small, lightweight and extensible Node.js library to validate/evaluate files (focused on use for config objects).
 
